@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 19:37:35 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/11 20:12:20 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/12 19:45:07 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,30 @@ void	ft_pa(t_intl **a, t_intl **b)
 	if (!((*b)))
 		return ;
 	ft_push_first(a, ft_del_first(b));
+}
+
+void	ft_print_op(t_intl **a, t_intl **b, char name, char who)
+{
+	if (name == 's')
+	{
+		if (who == 'a' || who == 's')
+			ft_sa(a);
+		if (who == 'b' || who == 's')
+			ft_sa(b);
+	}
+	else if (name == 'r')
+	{
+		if (who == 'a' || who == 'r')
+			ft_ra(a);
+		if (who == 'b' || who == 'r')
+			ft_ra(b);
+	}
+	else if (name == 'R')
+	{
+		if (who == 'a' || who == 'r')
+			ft_rra(a);
+		if (who == 'b' || who == 'r')
+			ft_rra(b);
+	}
+	ft_print_opt(a, b, name, who);
 }

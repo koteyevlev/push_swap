@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:59:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/11 18:59:39 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/12 19:05:38 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,21 @@ void	ft_create_int(t_intl **a, t_intl **b, char **argv, int argc)
 		i++;
 	}
 	*a = begin;
+}
+
+void	ft_print_opt(t_intl **a, t_intl **b, char name, char who)
+{
+	if (name == 'p')
+	{
+		if (who == 'a')
+			ft_pa(a, b);
+		if (who == 'b')
+			ft_pa(b, a);
+	}
+	if (name == 'R')
+		ft_putstr("rr");
+	else
+		ft_putchar(name);
+	ft_putchar(who);
+	ft_putchar('\n');
 }

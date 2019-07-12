@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:51:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/11 19:38:51 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/12 19:05:24 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ typedef	struct		s_printf
 	char			*format;
 }					t_printf;
 
-
+void				ft_print_op(t_intl **a, t_intl **b, char name, char who);
+void				ft_print_opt(t_intl **a, t_intl **b, char name, char who);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst,

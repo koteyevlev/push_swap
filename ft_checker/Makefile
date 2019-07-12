@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 13:09:04 by skrystin          #+#    #+#              #
-#    Updated: 2019/07/12 19:39:52 by skrystin         ###   ########.fr        #
+#    Updated: 2019/07/12 15:57:14 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,15 @@ HEADERS = $(includes/*.h)
 all: $(NAME)
    
 $(NAME):
-	@make -C ft_checker/ fclean && make -C ft_checker/ re
-	@gcc -o push_swap main.c ft_checker/ft*.c -L ft_checker/libft -lft
+	@make -C libft/ fclean && make -C libft/
+	@gcc -o ../$(NAME) *.c -L libft/ -lft
 
 clean:
-	@make -C ft_checker/ clean
+	@rm -f *.o;
+	@make -C libft/ clean
 
 fclean: clean
-	@make -C ft_checker/ fclean
+	@rm -f ../$(NAME);
+	@make -C libft/ fclean
 
 re: fclean all
