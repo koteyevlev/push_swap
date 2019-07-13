@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 13:09:04 by skrystin          #+#    #+#              #
-#    Updated: 2019/07/12 19:39:52 by skrystin         ###   ########.fr        #
+#    Updated: 2019/07/13 21:17:08 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,5 +25,6 @@ clean:
 
 fclean: clean
 	@make -C ft_checker/ fclean
+	@rm push_swap
 
 re: fclean all
