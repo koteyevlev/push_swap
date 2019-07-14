@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 19:37:35 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/12 19:45:07 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/14 14:13:39 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_pa(t_intl **a, t_intl **b)
 
 void	ft_print_op(t_intl **a, t_intl **b, char name, char who)
 {
+	count++;
 	if (name == 's')
 	{
 		if (who == 'a' || who == 's')

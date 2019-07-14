@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:51:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/12 19:05:24 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/14 14:14:07 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+int		count;
 typedef	struct		s_list
 {
 	void			*content;

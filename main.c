@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:32:29 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/13 20:30:38 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/14 23:25:50 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,14 @@ int		ft_is_sort(t_intl *a)
 
 	nbr = a->nbr;
 	while (a && nbr <= a->nbr)
+	{
+		nbr = a->nbr;
 		a = a->next;
+	}
 	if (!a)
 		return (1);
 	else
 		return (0);
-
 }
 
 void	ft_five_sort(t_intl **a, t_intl **b, int argc)
@@ -250,28 +252,295 @@ int		ft_median(t_intl *a, int x, int y, int argc)
 	return (sorted[argc / 2]);
 }
 
-void	ft_hard_sort(t_intl **a, t_intl **b, int argc)
+/* int		ft_s_or_r(t_intl **a, t_intl **b)
+{
+	t_intl	*tmpa;
+	t_intl	*tmpb;
+
+	if ((*b)->nbr >= (*b)->next->nbr && (*a)->nbr <= (*a)->next->nbr)
+		return (0);
+	tmpa = *a;
+	tmpb = *b;
+	while (tmpa->next)
+		tmpa = tmpa->next;
+	while (tmpb->next)
+		tmpb = tmpb->next;
+	// check with r
+} */
+
+int		ft_check_to_pa(t_intl *a, t_intl *b)
+{
+	t_intl	*tmp;
+
+	tmp = a;
+	if (!b)
+		return (0);
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if (!a || (b->nbr >= tmp->nbr && b->nbr <= a->nbr))
+		return(0);
+	return (0);
+}
+
+int		ft_check_to_pb(t_intl *a, t_intl *b)
+{
+	t_intl	*tmp;
+
+	tmp = b;
+	if (!a || !b || !b->next)
+		return (0);
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if (a->nbr < tmp->nbr && a->nbr > b->nbr)
+		return (1);
+	//	printf("a - %d   tmp - %d   b - %d\n", a->nbr, tmp->nbr, b->nbr);
+	return (0);
+}
+
+int		ft_num_el(t_intl *b)
+{
+	int		res;
+
+	res = 0;
+	while (b)
+	{
+		res++;
+		b = b->next;
+	}
+	return (res);
+}
+
+int		ft_check_r(t_intl **a, t_intl **b, int med)
+{
+	int		nbr;
+	t_intl	*tmpb;
+	t_intl	*tmpa;
+	
+	// ft_putstr("\n\n");
+	// ft_print_l(*a);
+	// ft_putstr(" - a\nb - ");
+	// ft_print_l(*b);
+	// ft_putstr("\n\n");
+	tmpa = *a;
+	while (tmpa->next)
+		tmpa = tmpa->next;
+	if (tmpa->nbr > (*a)->nbr && med > (*a)->nbr)
+		return (-1);
+	if (!*b || !(*b)->next)
+		return (1);
+	tmpb = *b;
+	nbr = (*b)->nbr;
+	while (tmpb->next)
+		tmpb = tmpb->next;
+	// ft_putnbr(tmpb->nbr);
+	// ft_putstr("vs");
+	// ft_putnbr(nbr);
+	if (tmpb->nbr <= nbr)
+		return (1);
+	else
+		return (0);
+}
+
+int		ft_optimize(t_intl **a, t_intl **b, int x, int med)
+{
+	t_intl	*tmpa;
+	t_intl	*tmpb;
+
+	// ft_putstr("\n\n");
+	// ft_print_l(*a);
+	// ft_putstr(" - a\nb - ");
+	// ft_print_l(*b);
+	// ft_putstr("\n\n");
+	tmpa = *a;
+	tmpb = *b;
+	while (tmpa && tmpa->next)
+		tmpa = tmpa->next;
+	while (tmpb && tmpb->next)
+		tmpb = tmpb->next;
+	if ((!*b || !(*b)->next || (*b)->nbr >= (*b)->next->nbr)
+	&& (*a)->nbr > (*a)->next->nbr)
+		ft_print_op(a, b, 's', 'a');
+	else if (!*b || !(*b)->next)
+		return (1);
+	else if (((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr > tmpb->nbr)
+	 && (*a)->nbr > (*a)->next->nbr)
+		ft_print_op(a, b, 's', 's');
+	else if (((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr > tmpb->nbr) && (*b)->nbr < tmpb->nbr)
+		ft_print_op(a, b, 'r', 'b');
+	else if ((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr < tmpb->nbr)
+	{
+		// ft_putnbr((*b)->nbr);
+		// ft_putchar(' ');
+		// ft_putnbr((*b)->next->nbr);
+		// ft_putchar(' ');
+		// ft_putnbr(tmpb->nbr);
+		ft_print_op(a, b, 's', 'b');
+	}
+	else
+		return (1);
+	return (ft_optimize(a, b, x, med));
+}
+
+void	ft_check_R(t_intl **a, t_intl **b, int med, int r)
+{
+	t_intl	*tmpa;
+	t_intl	*tmpb;
+	int		x;
+	int		l;
+
+	l = (*a)->nbr;
+	// ft_putnbr(l);
+	// ft_putstr("\n");
+	tmpa = *a;
+	tmpb = *b;
+	x = 0;
+	if (*b)
+		x = (*b)->nbr;
+	while (tmpa && tmpa->next)
+		tmpa = tmpa->next;
+	while (tmpb && tmpb->next)
+		tmpb = tmpb->next;
+	//ft_putnbr(tmpa->nbr);
+	//ft_putchar('\n');
+	if (tmpa->nbr < (*a)->next->nbr && tmpa->nbr <= med)
+	{
+		if (*b && (*b)->next && l > tmpa->nbr && (r < tmpb->nbr && tmpb->nbr < (*b)->next->nbr))
+		{
+			ft_print_op(a, b, 'R', 'r');
+			ft_check_R(a, b, (*a)->nbr, x);
+		}
+		else if (l > tmpa->nbr && (!*b || !((*b)->next) || r >= tmpb->nbr || tmpb->nbr >= (*b)->next->nbr))
+		{
+			ft_print_op(a, b, 'R', 'a');
+			ft_check_R(a, b, (*a)->nbr, x);
+		}
+	}
+	else if (*b && (*b)->next && (r < tmpb->nbr && tmpb->nbr < (*b)->next->nbr))
+	{
+		ft_print_op(a, b, 'R', 'b');
+		ft_check_R(a, b, (*a)->nbr, x);
+	}
+}
+
+int		ft_is_des_sort(t_intl *b)
+{
+	int	nbr;
+
+	if (!b)
+		return (1);
+	nbr = b->nbr;
+	while (b && nbr >= b->nbr)
+	{
+		nbr = b->nbr;
+		b = b->next;
+	}
+	if (!b)
+		return (1);
+	else
+		return (0);
+}
+
+void	ft_descending_sort(t_intl **b, t_intl **a, int stackb, int med)
+{
+	int		arg;
+	int		total;
+
+	total = stackb;
+	arg = stackb;
+	if (ft_is_des_sort(*b))
+		return ;
+	med = ft_median(*b, 1, 0, stackb);
+	while ((*b)->next)
+	{
+		if ((*b)->nbr >= med && arg--)
+			ft_print_op(a, b, 'p', 'a');
+		else
+			ft_print_op(a, b, 'r', 'b');
+		if (arg <= stackb / 2)
+		{
+			stackb = arg;
+			med = ft_median(*b, 1, 0, arg);
+			// ft_putstr("\n\n");
+			// ft_putnbr(arg);
+			// ft_putstr("\n\n");
+			// break ;
+		}
+	}
+	total -= arg;
+	med = 0;
+	while (total)
+	{
+	//	ft_putchar('\n');
+		while (total && (*a)->nbr < (*b)->nbr) // maybe bug
+		{
+			ft_print_op(a, b, 'r', 'b');
+			med++;
+		}
+		if (total--)
+			ft_print_op(a, b, 'p', 'b');
+		while (med)
+		{
+			ft_print_op(a, b, 'R', 'b');
+			//if (ft_check_to_pb(*a, *b) && total--)
+			{
+			//	ft_print_op(a, b, 'p', 'b');
+			//	break ;
+			}
+			med--;
+		}
+	}
+}
+
+void	ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp)
 {
 	int		med;
 	int		stacka;
+	int		des;
 
+	des = 1;
 	if (ft_is_sort(*a))
 		return ;
 	stacka = argc;
 	med = ft_median(*a, 1, 0, argc);
 	while ((*a)->next->next->next)
 	{
-		if ((*a)->nbr <= med && stacka--)
+	 	// if (*b)
+		// 	ft_check_R(a, b, med, (*b)->nbr);
+		// else
+		// 	ft_check_R(a, b, (*a)->nbr, 0);
+		// if (stacka == 24)
+		// 	break ;
+		if ((*a)->nbr <= med && ft_optimize(a, b, 0, med) && stacka--)
+		{
 			ft_print_op(a, b, 'p', 'b');
-		else
-			ft_print_op(a, b, 'R', 'a');
+			//break ;
+		}
+		else if (!(tmp = ft_check_r(a, b, med)) || tmp != -1)
+			ft_print_op(a, b, 'r', 'a');
+		else if (tmp == 1)
+			ft_print_op(a, b, 'r', 'r');
 		if (stacka <= argc / 2)
+		{
+			// ft_putnbr(med);
+			// ft_putstr("\n\n");
+			// ft_print_l(*a);
+			// ft_putstr(" - a\nb - ");
+			// ft_print_l(*b);
+			// ft_putstr("\n\n");
+			// ft_putnbr(med);
+			// ft_putstr("\n\n");
+			if (des-- >0)
+				ft_descending_sort(b, a, ft_num_el(*b), 0); // nmr of element not right
+			//break ;
+			argc = argc - stacka;
 			med = ft_median(*a, 1, 0, stacka);
+		}
+		//ft_putnbr((*a)->nbr);
 	}
 	ft_simple_sort(a, 4);
+	med = 0;
 	while (*b)
 	{
-		med = 0;
 	//	ft_putchar('\n');
 		while ((*b) && (*b)->nbr > (*a)->nbr) // maybe bug
 		{
@@ -283,8 +552,13 @@ void	ft_hard_sort(t_intl **a, t_intl **b, int argc)
 		while (med)
 		{
 			ft_print_op(a, b, 'R', 'a');
+			if (ft_check_to_pa(*a, *b))
+			{
+				ft_print_op(a, b, 'p', 'a');
+				break ;
+			}
 			med--;
-		}
+		} 
 	}
 }
 
@@ -303,12 +577,13 @@ int		main(int argc, char **argv)
 		else if (argc <= 6)
 			ft_medium_sort(&a, &b, argc);
 		else
-			ft_hard_sort(&a, &b, argc);
-		//	ft_putnbr(ft_median(a, 1, 0, argc));
-		/*  ft_print_l(a);
+			ft_hard_sort(&a, &b, argc - 1, 0);
+			//ft_putnbr(ft_median(a, 1, 0, argc));
+		ft_print_l(a);
 		ft_putstr(" - a\nb - ");
-		ft_print_l(b); */
-		
+		ft_print_l(b);
+		ft_putstr("\n action -");
+		ft_putnbr(count);
 		ft_del_all(&a, &b);
 	}
 	return (0);
