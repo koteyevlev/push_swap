@@ -6,168 +6,11 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:32:29 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/14 23:25:50 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:18:06 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_checker/libft/libft.h"
-
-void	ft_choose_op(t_intl **a, int f, int s, int t)
-{
-	if (s <= f && f <= t)
-		ft_print_op(a, 0, 's', 'a');
-	else if (t <= s && s <= f)
-	{
-		ft_print_op(a, 0, 's', 'a');
-		ft_print_op(a, 0, 'R', 'a');
-	}
-	else if (s <= t && t <= f)
-		ft_print_op(a, 0, 'r', 'a');
-	else if (f <= t && t <= s)
-	{
-		ft_print_op(a, 0, 's', 'a');
-		ft_print_op(a, 0, 'r', 'a');
-	}
-	else if (t <= f && f <= s)
-		ft_print_op(a, 0, 'R', 'a');
-}
-
-void	ft_simple_sort(t_intl **a, int argc)
-{
-	if (argc == 2 || (argc == 3 && (*a)->nbr <= (*a)->next->nbr))
-		return ;
-	else if (argc == 3 && (*a)->nbr > (*a)->next->nbr)
-		ft_print_op(a, 0, 's', 'a');
-	else if (argc == 4)
-	{
-		if ((*a)->nbr <= (*a)->next->nbr &&
-		(*a)->next->nbr <= (*a)->next->next->nbr)
-			return ;
-		else
-			ft_choose_op(a, (*a)->nbr, (*a)->next->nbr,
-			(*a)->next->next->nbr);
-	}
-}
-
-int		ft_min(t_intl **a, t_intl **b)
-{
-	t_intl	*begin;
-	int		nbr;
-
-	begin = *a;
-	if (!*a)
-		return (0);
-	nbr = (*a)->nbr;
-	while (begin->next)
-	{
-		begin = begin->next;
-		if (nbr > begin->nbr)
-			nbr = begin->nbr;
-	}
-	if (nbr == (*a)->nbr || nbr == (*a)->next->nbr
-	|| nbr == begin->nbr)
-	{
-		if (nbr == begin->nbr)
-			ft_print_op(a, b, 'R', 'a');
-		else if (nbr == (*a)->next->nbr)
-			ft_print_op(a, b, 's', 'a');
-		ft_print_op(a, b, 'p', 'b');
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int		min_max(t_intl **a, t_intl **b)
-{
-	t_intl	*begin;
-	int		nbr;
-	
-	if (ft_min(a, b))
-		return (1);
-	else
-	{
-		begin = *a;
-		if (!*a)
-			return (-1);
-		nbr = (*a)->nbr;
-		while (begin->next)
-		{
-			begin = begin->next;
-			if (nbr < begin->nbr)
-				nbr = begin->nbr;
-		}
-		if (nbr == (*a)->nbr || nbr == (*a)->next->nbr
-		|| nbr == begin->nbr)
-		{
-			if (nbr == begin->nbr)
-				ft_print_op(a, b, 'R', 'a');
-			else if (nbr == (*a)->next->nbr)
-				ft_print_op(a, b, 's', 'a');
-			ft_print_op(a, b, 'p', 'b');
-			return (0);
-		}
-		else
-			return (-1);
-	}
-}
-
-int		ft_is_sort(t_intl *a)
-{
-	int	nbr;
-
-	nbr = a->nbr;
-	while (a && nbr <= a->nbr)
-	{
-		nbr = a->nbr;
-		a = a->next;
-	}
-	if (!a)
-		return (1);
-	else
-		return (0);
-}
-
-void	ft_five_sort(t_intl **a, t_intl **b, int argc)
-{
-	if (argc == 5 || (ft_is_sort(*a) && !*b))
-		return ;
-	if (argc == 1 || argc == 0)
-		ft_print_op(a, b, 'p', 'a');
-	if (argc == 0)
-		ft_print_op(a, b, 'r', 'a');
-}
-
-void	ft_medium_sort(t_intl **a, t_intl **b, int argc)
-{
-	int x;
-
-	x = 0;
-	if (argc == 6)
-	{
-		if (!ft_is_sort(*a) && (x = min_max(a, b)) == -1)
-		{
-			ft_print_op(a, b, 'R', 'a');
-			x = min_max(a, b);
-		}
-		argc = x;
-	}
-	if (argc == 5 || argc == x)
-	{
-		if (!ft_is_sort(*a) && (x = min_max(a, b)) > 0)
-		{
-			ft_simple_sort(a, 4);
-			ft_print_op(a, b, 'p', 'a');
-		}
-		else if (!ft_is_sort(*a) && x != -1)
-		{
-			ft_simple_sort(a, 4);
-			ft_print_op(a, b, 'p', 'a');
-			ft_print_op(a, b, 'r', 'a');
-		}
-	}
-	ft_five_sort(a, b, argc);
-}
 
 /* int		ft_median(int *a, int argc, int x, int y)
 {
@@ -214,44 +57,6 @@ void	ft_medium_sort(t_intl **a, t_intl **b, int argc)
 	}
 } */
 
-int		*ft_massiv(t_intl *a, int argc)
-{
-	int		*res;
-	int		i;
-
-	res = (int *)malloc(sizeof(int) * (argc));
-	i = 0;
-	while (a)
-	{
-		res[i] = a->nbr;
-		i++;
-		a = a->next;
-	}
-	return (res);
-}
-
-int		ft_median(t_intl *a, int x, int y, int argc)
-{
-	int		*sorted;
-	int		key;
-
-	sorted = ft_massiv(a, argc);
-	while (x < argc)
-	{
-		y = x - 1;
-		key = sorted[x];
-		while (y >= 0 && sorted[y] > key)
-		{
-			sorted[y + 1] = sorted[y];
-			y--;
-		}
-		sorted[y + 1] = key;
-		x++;
-	}
-	free(sorted);
-	return (sorted[argc / 2]);
-}
-
 /* int		ft_s_or_r(t_intl **a, t_intl **b)
 {
 	t_intl	*tmpa;
@@ -295,19 +100,6 @@ int		ft_check_to_pb(t_intl *a, t_intl *b)
 		return (1);
 	//	printf("a - %d   tmp - %d   b - %d\n", a->nbr, tmp->nbr, b->nbr);
 	return (0);
-}
-
-int		ft_num_el(t_intl *b)
-{
-	int		res;
-
-	res = 0;
-	while (b)
-	{
-		res++;
-		b = b->next;
-	}
-	return (res);
 }
 
 int		ft_check_r(t_intl **a, t_intl **b, int med)
@@ -357,17 +149,17 @@ int		ft_optimize(t_intl **a, t_intl **b, int x, int med)
 		tmpa = tmpa->next;
 	while (tmpb && tmpb->next)
 		tmpb = tmpb->next;
-	if ((!*b || !(*b)->next || (*b)->nbr >= (*b)->next->nbr)
+	/* if ((!*b || !(*b)->next || (*b)->nbr >= (*b)->next->nbr)
 	&& (*a)->nbr > (*a)->next->nbr)
 		ft_print_op(a, b, 's', 'a');
-	else if (!*b || !(*b)->next)
+	else */if (!*b || !(*b)->next)
 		return (1);
-	else if (((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr > tmpb->nbr)
-	 && (*a)->nbr > (*a)->next->nbr)
-		ft_print_op(a, b, 's', 's');
+	/* else if (((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr > tmpb->nbr)
+	&& (*a)->nbr > (*a)->next->nbr)
+		ft_print_op(a, b, 's', 's'); */
 	else if (((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr > tmpb->nbr) && (*b)->nbr < tmpb->nbr)
 		ft_print_op(a, b, 'r', 'b');
-	else if ((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr < tmpb->nbr)
+	/*else if ((*b)->nbr < (*b)->next->nbr && (*b)->next->nbr < tmpb->nbr)
 	{
 		// ft_putnbr((*b)->nbr);
 		// ft_putchar(' ');
@@ -375,7 +167,7 @@ int		ft_optimize(t_intl **a, t_intl **b, int x, int med)
 		// ft_putchar(' ');
 		// ft_putnbr(tmpb->nbr);
 		ft_print_op(a, b, 's', 'b');
-	}
+	} */
 	else
 		return (1);
 	return (ft_optimize(a, b, x, med));
@@ -456,6 +248,10 @@ void	ft_descending_sort(t_intl **b, t_intl **a, int stackb, int med)
 			ft_print_op(a, b, 'p', 'a');
 		else
 			ft_print_op(a, b, 'r', 'b');
+		if ((*a)->nbr > (*a)->next->nbr && (*b)->next && (*b)->nbr < (*b)->next->nbr)
+			ft_print_op(a, b, 's', 's');
+		else if ((*a)->nbr > (*a)->next->nbr)
+			ft_print_op(a, b, 's', 'a');
 		if (arg <= stackb / 2)
 		{
 			stackb = arg;
@@ -480,11 +276,12 @@ void	ft_descending_sort(t_intl **b, t_intl **a, int stackb, int med)
 			ft_print_op(a, b, 'p', 'b');
 		while (med)
 		{
+			if (total && (*a)->nbr <= (*b)->nbr)
+				break ;
 			ft_print_op(a, b, 'R', 'b');
-			//if (ft_check_to_pb(*a, *b) && total--)
+			if (ft_check_to_pb(*a, *b) && total--)
 			{
-			//	ft_print_op(a, b, 'p', 'b');
-			//	break ;
+				ft_print_op(a, b, 'p', 'b');
 			}
 			med--;
 		}
@@ -497,12 +294,12 @@ void	ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp)
 	int		stacka;
 	int		des;
 
-	des = 1;
+	des = 0;
 	if (ft_is_sort(*a))
 		return ;
 	stacka = argc;
 	med = ft_median(*a, 1, 0, argc);
-	while ((*a)->next->next->next)
+	while ((*a)->next->next->next->next->next)
 	{
 	 	// if (*b)
 		// 	ft_check_R(a, b, med, (*b)->nbr);
@@ -531,13 +328,14 @@ void	ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp)
 			// ft_putstr("\n\n");
 			if (des-- >0)
 				ft_descending_sort(b, a, ft_num_el(*b), 0); // nmr of element not right
-			//break ;
+			break ;
 			argc = argc - stacka;
 			med = ft_median(*a, 1, 0, stacka);
 		}
 		//ft_putnbr((*a)->nbr);
 	}
-	ft_simple_sort(a, 4);
+	ft_medium_sort(a, b, 5);
+//	return ;
 	med = 0;
 	while (*b)
 	{
@@ -551,11 +349,12 @@ void	ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp)
 			ft_print_op(a, b, 'p', 'a');
 		while (med)
 		{
+			if ((*b) && (*b)->nbr >= (*a)->nbr)
+				break ;
 			ft_print_op(a, b, 'R', 'a');
 			if (ft_check_to_pa(*a, *b))
 			{
 				ft_print_op(a, b, 'p', 'a');
-				break ;
 			}
 			med--;
 		} 
@@ -582,8 +381,6 @@ int		main(int argc, char **argv)
 		ft_print_l(a);
 		ft_putstr(" - a\nb - ");
 		ft_print_l(b);
-		ft_putstr("\n action -");
-		ft_putnbr(count);
 		ft_del_all(&a, &b);
 	}
 	return (0);

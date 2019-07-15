@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:51:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/14 14:14:07 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:07:47 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 
 # include <string.h>
 # include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdarg.h>
 
-int		count;
 typedef	struct		s_list
 {
 	void			*content;
@@ -83,6 +82,16 @@ typedef	struct		s_printf
 	char			*format;
 }					t_printf;
 
+int					ft_num_el(t_intl *b);
+int					ft_median(t_intl *a, int x, int y, int argc);
+int					*ft_massiv(t_intl *a, int argc);
+void				ft_medium_sort(t_intl **a, t_intl **b, int argc);
+void				ft_five_sort(t_intl **a, t_intl **b, int argc);
+int					ft_is_sort(t_intl *a);
+int					min_max(t_intl **a, t_intl **b);
+int					ft_min(t_intl **a, t_intl **b);
+void				ft_simple_sort(t_intl **a, int argc);
+void				ft_choose_op(t_intl **a, int f, int s, int t);
 void				ft_print_op(t_intl **a, t_intl **b, char name, char who);
 void				ft_print_opt(t_intl **a, t_intl **b, char name, char who);
 void				*ft_memset(void *b, int c, size_t len);
@@ -170,9 +179,11 @@ t_intl				*ft_del_last(t_intl **a);
 t_intl				*ft_del_first(t_intl **a);
 void				ft_push_first(t_intl **a, t_intl *el);
 void				ft_push_last(t_intl **a, t_intl *el);
-void				ft_create_int(t_intl **a, t_intl **b, char **argv, int argc);
+void				ft_create_int(t_intl **a, t_intl **b,
+char **argv, int argc);
 int					ft_isint(char *str);
-void				ft_create_int(t_intl **a, t_intl **b, char **argv, int argc);
+void				ft_create_int(t_intl **a, t_intl **b,
+char **argv, int argc);
 void				ft_del_all(t_intl **a, t_intl **b);
 void				ft_sa(t_intl **a);
 void				ft_rra(t_intl **a);

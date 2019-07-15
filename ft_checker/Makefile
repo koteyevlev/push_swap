@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 13:09:04 by skrystin          #+#    #+#              #
-#    Updated: 2019/07/12 15:57:14 by skrystin         ###   ########.fr        #
+#    Updated: 2019/07/15 18:59:39 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ all: $(NAME)
    
 $(NAME):
 	@make -C libft/ fclean && make -C libft/
-	@gcc -o ../$(NAME) *.c -L libft/ -lft
+	@gcc -o ../$(NAME) *.c ../ft_simple_sort.c -L libft/ -lft
 
 clean:
 	@rm -f *.o;

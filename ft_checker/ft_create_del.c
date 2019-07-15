@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create&del.c                                    :+:      :+:    :+:   */
+/*   ft_create_del.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:59:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/12 19:05:38 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:16:01 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int		ft_isint(char *str)
 	int		i;
 
 	nbr = ft_atoi(str);
-	if(!(check = ft_itoa(nbr)))
-		exit (0);
+	if (!(check = ft_itoa(nbr)))
+		exit(0);
 	i = 0;
 	while (str[i] && str[i] == check[i])
 		i++;
@@ -51,7 +51,7 @@ int		ft_isint(char *str)
 
 void	ft_create_int(t_intl **a, t_intl **b, char **argv, int argc)
 {
-	int 	i;
+	int		i;
 	t_intl	*tmp;
 	t_intl	*begin;
 
@@ -63,18 +63,17 @@ void	ft_create_int(t_intl **a, t_intl **b, char **argv, int argc)
 		if (!ft_isint(argv[i]))
 		{
 			ft_putstr("Error\n");
-			exit (0);
+			exit(0);
 		}
 		if (!(*a = (t_intl *)malloc(sizeof(t_intl))))
-			exit (0);
+			exit(0);
 		if (i == 1)
 			begin = *a;
 		if (tmp)
 			tmp->next = (*a);
-		(*a)->nbr = ft_atoi(argv[i]);
+		(*a)->nbr = ft_atoi(argv[i++]);
 		(*a)->next = 0;
 		tmp = *a;
-		i++;
 	}
 	*a = begin;
 }
