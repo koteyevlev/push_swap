@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:51:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 18:07:47 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:24:06 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,22 @@ typedef	struct		s_printf
 	char			*format;
 }					t_printf;
 
+void				ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp);
+void				ft_descending_sort(t_intl **b, t_intl **a,
+int stackb, int med);
+int					ft_is_des_sort(t_intl *b);
+int					ft_optimize(t_intl **a, t_intl **b, int x, int med);
+int					ft_check_r(t_intl **a, t_intl **b, int med);
+int					ft_check_to_pb(t_intl *a, t_intl *b);
+int					ft_check_to_pa(t_intl *a, t_intl *b);
+int					ft_check_nbr(char **argv, int argc, int i);
 int					ft_num_el(t_intl *b);
 int					ft_median(t_intl *a, int x, int y, int argc);
 int					*ft_massiv(t_intl *a, int argc);
-void				ft_medium_sort(t_intl **a, t_intl **b, int argc);
+void				ft_medium_sort(t_intl **a, t_intl **b, int argc, int x);
 void				ft_five_sort(t_intl **a, t_intl **b, int argc);
 int					ft_is_sort(t_intl *a);
-int					min_max(t_intl **a, t_intl **b);
+int					min_max(t_intl **a, t_intl **b, t_intl *begin, int nbr);
 int					ft_min(t_intl **a, t_intl **b);
 void				ft_simple_sort(t_intl **a, int argc);
 void				ft_choose_op(t_intl **a, int f, int s, int t);

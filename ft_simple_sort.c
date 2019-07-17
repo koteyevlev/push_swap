@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_simle_sort.c                                    :+:      :+:    :+:   */
+/*   ft_simple_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 14:29:38 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 14:32:34 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/15 19:15:03 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,69 +46,6 @@ void	ft_simple_sort(t_intl **a, int argc)
 		else
 			ft_choose_op(a, (*a)->nbr, (*a)->next->nbr,
 			(*a)->next->next->nbr);
-	}
-}
-
-int		ft_min(t_intl **a, t_intl **b)
-{
-	t_intl	*begin;
-	int		nbr;
-
-	begin = *a;
-	if (!*a)
-		return (0);
-	nbr = (*a)->nbr;
-	while (begin->next)
-	{
-		begin = begin->next;
-		if (nbr > begin->nbr)
-			nbr = begin->nbr;
-	}
-	if (nbr == (*a)->nbr || nbr == (*a)->next->nbr
-	|| nbr == begin->nbr)
-	{
-		if (nbr == begin->nbr)
-			ft_print_op(a, b, 'R', 'a');
-		else if (nbr == (*a)->next->nbr)
-			ft_print_op(a, b, 's', 'a');
-		ft_print_op(a, b, 'p', 'b');
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int		min_max(t_intl **a, t_intl **b)
-{
-	t_intl	*begin;
-	int		nbr;
-	
-	if (ft_min(a, b))
-		return (1);
-	else
-	{
-		begin = *a;
-		if (!*a)
-			return (-1);
-		nbr = (*a)->nbr;
-		while (begin->next)
-		{
-			begin = begin->next;
-			if (nbr < begin->nbr)
-				nbr = begin->nbr;
-		}
-		if (nbr == (*a)->nbr || nbr == (*a)->next->nbr
-		|| nbr == begin->nbr)
-		{
-			if (nbr == begin->nbr)
-				ft_print_op(a, b, 'R', 'a');
-			else if (nbr == (*a)->next->nbr)
-				ft_print_op(a, b, 's', 'a');
-			ft_print_op(a, b, 'p', 'b');
-			return (0);
-		}
-		else
-			return (-1);
 	}
 }
 

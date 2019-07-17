@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:59:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 18:16:01 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:06:42 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,32 @@ void	ft_print_opt(t_intl **a, t_intl **b, char name, char who)
 		ft_putchar(name);
 	ft_putchar(who);
 	ft_putchar('\n');
+}
+
+int		ft_check_nbr(char **argv, int argc, int i)
+{
+	int	x;
+	int	mas[argc];
+
+	while (i <= argc)
+	{
+		mas[i - 1] = ft_atoi(argv[i]);
+		i++;
+	}
+	x = 0;
+	while (x < argc - 1)
+	{
+		i = x + 1;
+		while (i < argc)
+		{
+			if (mas[x] == mas[i])
+			{
+				ft_putstr("Error\n");
+				return (0);
+			}
+			i++;
+		}
+		x++;
+	}
+	return (1);
 }

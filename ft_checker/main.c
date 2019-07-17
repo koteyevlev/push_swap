@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:32:29 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 19:01:20 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/16 14:49:05 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,34 +77,6 @@ void		ft_checkwork(t_intl **a, t_intl **b, char *s)
 			ft_rra(b);
 	}
 	ft_vivod(b, *a);
-}
-
-int			ft_check_nbr(char **argv, int argc, int i)
-{
-	int	x;
-	int	mas[argc];
-
-	while (i <= argc)
-	{
-		mas[i - 1] = ft_atoi(argv[i]);
-		i++;
-	}
-	x = 0;
-	while (x < argc - 1)
-	{
-		i = x + 1;
-		while (i < argc)
-		{
-			if (mas[x] == mas[i])
-			{
-				ft_putstr("Error\n");
-				return (0);
-			}
-			i++;
-		}
-		x++;
-	}
-	return (1);
 }
 
 int			main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 14:30:49 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 14:32:07 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/15 19:16:24 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,6 @@ void	ft_five_sort(t_intl **a, t_intl **b, int argc)
 		ft_print_op(a, b, 'p', 'a');
 	if (argc == 0)
 		ft_print_op(a, b, 'r', 'a');
-}
-
-void	ft_medium_sort(t_intl **a, t_intl **b, int argc)
-{
-	int x;
-
-	x = 0;
-	if (argc == 6)
-	{
-		if (!ft_is_sort(*a) && (x = min_max(a, b)) == -1)
-		{
-			ft_print_op(a, b, 'R', 'a');
-			x = min_max(a, b);
-		}
-		argc = x;
-	}
-	if (argc == 5 || argc == x)
-	{
-		if (!ft_is_sort(*a) && (x = min_max(a, b)) > 0)
-		{
-			ft_simple_sort(a, 4);
-			ft_print_op(a, b, 'p', 'a');
-		}
-		else if (!ft_is_sort(*a) && x != -1)
-		{
-			ft_simple_sort(a, 4);
-			ft_print_op(a, b, 'p', 'a');
-			ft_print_op(a, b, 'r', 'a');
-		}
-	}
-	ft_five_sort(a, b, argc);
 }
 
 int		*ft_massiv(t_intl *a, int argc)
