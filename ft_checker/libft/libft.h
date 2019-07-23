@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:51:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/16 15:24:06 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/23 21:03:52 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef	struct		s_printf
 	char			*format;
 }					t_printf;
 
+void				ft_check_flags(int *argc, char ***argv, int *flag);
 void				ft_hard_sort(t_intl **a, t_intl **b, int argc, int tmp);
 void				ft_descending_sort(t_intl **b, t_intl **a,
 int stackb, int med);

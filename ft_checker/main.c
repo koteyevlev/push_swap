@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:32:29 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/16 14:49:05 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/23 21:05:25 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		ft_checkwork(t_intl **a, t_intl **b, char *s)
 		if (*s == 'r' && *(s + 1) == 'r' &&
 		(*(s + 2) == 'b' || *(s + 2) == 'r'))
 			ft_rra(b);
+		free(s);
 	}
 	ft_vivod(b, *a);
 }
@@ -84,13 +85,23 @@ int			main(int argc, char **argv)
 	int		i;
 	t_intl	*a;
 	t_intl	*b;
+	int		flag;
 
+	flag = 0;
+	if (argc >= 2)
+		ft_check_flags(&argc, &argv, &flag);
 	if (argc >= 2 && ft_check_nbr(argv, argc - 1, 1))
 	{
 		i = 1;
 		ft_create_int(&a, &b, argv, argc);
 		ft_checkwork(&a, &b, 0);
 		ft_del_all(&a, &b);
+	}
+	if (argv[0][0] == '-' && (i = 0) == 0)
+	{
+		while(argv[i])
+			free(argv[i++]);
+		free(argv);
 	}
 	return (0);
 }

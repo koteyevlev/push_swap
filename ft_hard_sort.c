@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:07:59 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/16 15:21:52 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/23 21:00:47 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_end_asc_sort(t_intl **a, t_intl **b, int med)
 			ft_print_op(a, b, 'r', 'a');
 			med++;
 		}
-		if (*b)
+		if (*b && (*b)->nbr < (*a)->nbr)
 			ft_print_op(a, b, 'p', 'a');
 		while (med)
 		{

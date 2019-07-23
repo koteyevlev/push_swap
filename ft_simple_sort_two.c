@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 14:30:49 by skrystin          #+#    #+#             */
-/*   Updated: 2019/07/15 19:16:24 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/07/23 21:00:21 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_five_sort(t_intl **a, t_intl **b, int argc)
 {
-	if (argc == 5 || (ft_is_sort(*a) && !*b))
+	if (argc == 5 || (ft_is_sort(*a) && (!*b || ft_num_el(*a) == 5)))
 		return ;
 	if (argc == 1 || argc == 0)
 		ft_print_op(a, b, 'p', 'a');
